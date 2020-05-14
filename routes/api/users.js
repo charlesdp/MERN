@@ -31,9 +31,9 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      // See if user exists
       let user = await User.findOne({ email });
 
+      // See if user exists
       if (user) {
         return res
           .status(400)
@@ -47,6 +47,7 @@ router.post(
         d: 'mm'
       });
 
+      // Creating new user
       user = new User({
         name,
         email,
@@ -59,6 +60,7 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
+      // Saving new user
       await user.save();
 
       const payload = {
@@ -78,7 +80,7 @@ router.post(
         }
       );
     } catch (err) {
-      console.log(err.message);
+      console.log(err.message); // console.ERROR(err.message); ?
       res.status(500).send('Server error');
     }
   }
