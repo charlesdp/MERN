@@ -17,6 +17,7 @@ const PostSchema = new Schema({
     type: String
   },
   likes: [
+    // Is an ARRAY
     {
       user: {
         type: Schema.Types.ObjectId,
